@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.equipment.R
+import com.example.equipment.domain.ShopItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.shopList.observe(this){
             Log.e("MainActivityTest",it.toString())
         }
+        viewModel.getShopList()
+        viewModel.changeEnableState(ShopItem("Name 2",1,true,2))
+        viewModel.deleteShopItem(ShopItem("Name 3",1,true,3))
         viewModel.getShopList()
     }
 }
