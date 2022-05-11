@@ -25,27 +25,23 @@ class MainActivity : AppCompatActivity() {
             showList(it)
 
 
-
         }
-
-//            viewModel.changeEnableState(ShopItem("Name 2",1,true,2))
-//            viewModel.deleteShopItem(ShopItem("Name 3",1,true,3))
     }
 
     private fun showList(list: List<ShopItem>) {
         llShopList.removeAllViews()
-        for (shopItem in list){
-            val layoutId = if (shopItem.enabled){
+        for (shopItem in list) {
+            val layoutId = if (shopItem.enabled) {
                 R.layout.item_shop_enabled
-            }else {
+            } else {
                 R.layout.item_shop_disabled
             }
-            val view = LayoutInflater.from(this).inflate(layoutId,llShopList,false)
+            val view = LayoutInflater.from(this).inflate(layoutId, llShopList, false)
             val tvName = view.findViewById<TextView>(R.id.tv_name)
             val tvCount = view.findViewById<TextView>(R.id.tv_count)
             tvName.text = shopItem.name
             tvCount.text = shopItem.count.toString()
-            view.setOnLongClickListener{
+            view.setOnLongClickListener {
                 viewModel.changeEnableState(shopItem)
                 true
             }
