@@ -41,16 +41,19 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
         }
         if (shopItem.enabled){
             viewHolder.tvName.setTextColor(ContextCompat.getColor(viewHolder.view.context,android.R.color.holo_red_light))
+        }else{
+            viewHolder.tvName.setTextColor(ContextCompat.getColor(viewHolder.view.context,android.R.color.white))
         }
+
     }
 
     override fun getItemCount(): Int {
         return shopList.size
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return position
-    }
+//    override fun getItemViewType(position: Int): Int {
+//        return position
+//    }
 
     class ShopItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val tvName = view.findViewById<TextView>(R.id.tv_name)
