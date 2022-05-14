@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.equipment.R
 import com.example.equipment.domain.ShopItem
@@ -17,6 +18,9 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
             field = value
             notifyDataSetChanged()
         }
+    var onShopItemLongClickListener:((ShopItem)->Unit)? = null
+    var onShopItemClickListener:((ShopItem)->Unit)? = null
+    var onShopItemSwipeListener: ((ShopItem)->Unit)? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
@@ -39,6 +43,11 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
         viewHolder.tvName.text = shopItem.name
         viewHolder.tvCount.text = shopItem.count.toString()
         viewHolder.view.setOnLongClickListener {
+            onShopItemLongClickListener?.invoke(shopItem)
+            true
+        }
+        viewHolder.view.setOnClickListener {
+            onShopItemClickListener?.invoke(shopItem)
             true
         }
     }
@@ -65,11 +74,19 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
         val tvName = view.findViewById<TextView>(R.id.tv_name)
         val tvCount = view.findViewById<TextView>(R.id.tv_count)
     }
+
+//    interface OnShopItemLongClickListener{
+//        fun onShopItemLongClick(shopItem: ShopItem)
+//    }
+    interface ItemTouchHelperAdapter{
+        fun onItemDismiss(position: Int)
+    }
+
+
+
     companion object{
         const val VIEW_TYPE_ENABLED =1
         const val VIEW_TYPE_DISABLED = 0
         const val MAX_POOL_SIZE = 15
     }
-
-
 }
