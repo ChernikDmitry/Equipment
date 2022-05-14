@@ -78,10 +78,6 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
 //    interface OnShopItemLongClickListener{
 //        fun onShopItemLongClick(shopItem: ShopItem)
 //    }
-    interface ItemTouchHelperAdapter{
-        fun onItemDismiss(position: Int)
-    }
-
 
 
     companion object{
