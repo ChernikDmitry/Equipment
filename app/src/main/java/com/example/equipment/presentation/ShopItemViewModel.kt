@@ -42,8 +42,7 @@ class ShopItemViewModel : ViewModel() {
         }
     }
 
-    fun editShopItem(oldShopItem: ShopItem, inputName: String?, inputCount: String?) {
-        val shopItemId = oldShopItem.id
+    fun editShopItem(inputName: String?, inputCount: String?) {
         val name = parseName(inputName)
         val count = parseCount(inputCount)
         val fieldsValid = validateInput(name, count)
