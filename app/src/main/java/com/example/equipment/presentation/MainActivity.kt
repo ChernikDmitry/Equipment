@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = ShopItemActivity.newIntentAddItem(this)
                 startActivity(intent)
             } else {
-                launchFragment(ShopItemFragment.newInstanceAddItem())
+                launchFragment(ShopItemFragment.newInstanceAddItem(), "add")
             }
 
         }
@@ -44,14 +45,17 @@ class MainActivity : AppCompatActivity() {
         return shopItemContainer == null
     }
 
-    private fun launchFragment(fragment: Fragment) {
-        supportFragmentManager.popBackStack()
+    private fun launchFragment(fragment: Fragment, name:String) {
+//        supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .replace(R.id.shop_item_container, fragment)
-            .addToBackStack(null)
+            .addToBackStack(name)
             .commit()
     }
 
+    override fun onBackPressed() {
+        supportFragmentManager.popBackStack("add",FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
 
     private fun setupRecyclerView() {
         val rvShopList = findViewById<RecyclerView>(R.id.rv_shop_list)
@@ -100,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = ShopItemActivity.newIntentEditItem(this, it.id)
                 startActivity(intent)
             } else {
-                launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
+                launchFragment(ShopItemFragment.newInstanceEditItem(it.id),"edit")
             }
         }
     }
