@@ -16,11 +16,12 @@ import com.example.equipment.domain.ShopItem
 import com.google.android.material.textfield.TextInputLayout
 import java.security.AccessControlContext
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(),ShopItemFragment.OnEditingFinishedListener {
 
 
     private var screenMode = MODE_UNKNOWN
     private var shopItemId = ShopItem.UNDEFINED_ID
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,11 @@ class ShopItemActivity : AppCompatActivity() {
             launchRightMode()
         }
     }
+
+    override fun onEditingFinished() {
+       finish()
+    }
+
 
     private fun launchRightMode() {
         val fragment = when (screenMode) {
@@ -80,4 +86,6 @@ class ShopItemActivity : AppCompatActivity() {
             return intent
         }
     }
+
+
 }
