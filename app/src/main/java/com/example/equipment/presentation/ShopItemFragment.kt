@@ -32,6 +32,7 @@ class ShopItemFragment() : Fragment() {
     private var shopItemId: Int = ShopItem.UNDEFINED_ID
 
     override fun onAttach(context: Context) {
+        Log.d("lifecycle","onAttach")
         super.onAttach(context)
         if(context is OnEditingFinishedListener){
             onEditingFinishedListener=context
@@ -41,6 +42,7 @@ class ShopItemFragment() : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("lifecycle","onCreate")
         super.onCreate(savedInstanceState)
         parseParams()
     }
@@ -50,17 +52,53 @@ class ShopItemFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        Log.d("lifecycle","onCreateView")
         return inflater.inflate(R.layout.fragment_shop_item, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("lifecycle","onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
         initViews(view)
         addTextChangeListeners()
         launchRightMode()
         observeViewModel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("lifecycle","onStart $this")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("lifecycle","onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("lifecycle","onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("lifecycle","onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("lifecycle","onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("lifecycle","onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("lifecycle","onDetach")
     }
 
 
