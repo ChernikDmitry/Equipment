@@ -32,8 +32,8 @@ class ShopItemFragment() : Fragment() {
     private var shopItemId: Int = ShopItem.UNDEFINED_ID
 
     override fun onAttach(context: Context) {
-        Log.d("lifecycle","onAttach")
         super.onAttach(context)
+        Log.d("lifecycle","onAttach")
         if(context is OnEditingFinishedListener){
             onEditingFinishedListener=context
         } else{
@@ -42,8 +42,8 @@ class ShopItemFragment() : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("lifecycle","onCreate")
         super.onCreate(savedInstanceState)
+        Log.d("lifecycle","onCreate")
         parseParams()
     }
 
@@ -57,8 +57,8 @@ class ShopItemFragment() : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("lifecycle","onViewCreated")
         super.onViewCreated(view, savedInstanceState)
+        Log.d("lifecycle","onViewCreated")
         viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
         initViews(view)
         addTextChangeListeners()
